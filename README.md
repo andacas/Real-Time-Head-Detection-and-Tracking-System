@@ -100,7 +100,7 @@ ros2 run head_detector head_detector_node \
   title  = {Real-Time 3-D Haar-Cascade Head Detection},
   author = {Castro Peñaranda, A.~A. and Alikhani Najafabadi, M.},
   year   = {2025},
-  howpublished = {\url{https://github.com/rt3d-haar/head_detector}}
+  howpublished = {\url{https://github.com/andacas/Real-Time-Head-Detection-and-Tracking-System.git}}
 }
 ```
 

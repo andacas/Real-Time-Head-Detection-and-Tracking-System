@@ -52,8 +52,6 @@ avatar; RViz opens and overlays a green cube on the detected head.
 
 [Click here to watch the demo](https://github.com/andacas/Real-Time-Head-Detection-and-Tracking-System/blob/main/src/assets/videos/gazebo_realtime.mp4)
 
-[![Watch the video](https://github.com/andacas/Real-Time-Head-Detection-and-Tracking-System/blob/main/src/assets/videos/gazebo_realtime.mp4)](https://github.com/andacas/Real-Time-Head-Detection-and-Tracking-System/blob/main/src/assets/videos/gazebo_realtime.mp4)
-
 ---
 
 ## 🧩 Package Overview

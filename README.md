@@ -50,7 +50,9 @@ source install/setup.bash
 After a few seconds Gazebo spawns two RealSense D435i sensors and a walking
 avatar; RViz opens and overlays a green cube on the detected head.
 
-<video src="src/assets/videos/gazebo_realtime.mp4" width="320" height="240" controls></video>
+[Click here to watch the demo](https://github.com/andacas/Real-Time-Head-Detection-and-Tracking-System/blob/main/src/assets/videos/gazebo_realtime.mp4)
+
+[![Watch the video](https://github.com/andacas/Real-Time-Head-Detection-and-Tracking-System/blob/main/src/assets/videos/gazebo_realtime.mp4)](https://github.com/andacas/Real-Time-Head-Detection-and-Tracking-System/blob/main/src/assets/videos/gazebo_realtime.mp4)
 
 ---
 

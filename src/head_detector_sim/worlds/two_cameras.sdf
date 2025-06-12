@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<sdf version="1.8">
+  <world name="two_cameras">
+
+    <!-- 1) Physics engine -->
+    <physics name="default_physics" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <!-- 2) Core system plugins -->
+    <plugin filename="ignition-gazebo-scene-broadcaster-system"
+            name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="ignition-gazebo-sensors-system"
+            name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="ignition-gazebo-user-commands-system"
+            name="gz::sim::systems::UserCommands"/>
+    <plugin filename="ignition-gazebo-physics-system"
+            name="gz::sim::systems::Physics"/>
+    <plugin filename="ignition-gazebo-contact-system"
+            name="ignition::gazebo::systems::Contact"/>
+
+    <!-- 3) Sun & Ground Plane from Fuel -->
+    <include>
+      <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/sun</uri>
+    </include>
+    <include>
+      <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Ground%20Plane</uri>
+    </include>
+
+    <!-- 4) GUI camera preset -->
+    <gui fullscreen="0">
+      <camera name="user_camera">
+        <pose>0.556 -0.9132 0.8266 0 0.59 2.15</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+
+    <!-- 5) Walking actor with full trajectory -->
+    <actor name="actor_walking">
+      <pose>0 0 1.0 0 0 0</pose>
+      <skin>
+        <filename>https://fuel.gazebosim.org/1.0/Mingfei/models/actor/tip/files/meshes/walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walk">
+        <filename>https://fuel.gazebosim.org/1.0/Mingfei/models/actor/tip/files/meshes/walk.dae</filename>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <delay_start>0.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walk">
+          <waypoint>
+            <time>0</time>
+            <pose>0 0 0.01 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>2</time>
+            <pose>1 0 0.01 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>2.5</time>
+            <pose>1 0 0.01 0 0 1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>4</time>
+            <pose>1 1 0.01 0 0 1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>4.5</time>
+            <pose>1 1 0.01 0 0 3.142</pose>
+          </waypoint>
+          <waypoint>
+            <time>6</time>
+            <pose>0 1 0.01 0 0 3.142</pose>
+          </waypoint>
+          <waypoint>
+            <time>6.5</time>
+            <pose>0 1 0.01 0 0 -1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>8</time>
+            <pose>0 0 0.01 0 0 -1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>8.5</time>
+            <pose>0 0 0.01 0 0 0</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+    <!-- 6) Right depth camera @ +2m, sensor yaw=π (faces actor) -->
+    <model name="depth_camera_plus_x">
+      <static>true</static>
+      <pose>2 0 1 0 0 0</pose>
+      <link name="link">
+        <visual name="viz_box_right">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry><box><size>0.2 0.2 0.2</size></box></geometry>
+          <material>
+            <ambient>0 0 1 0.5</ambient>
+            <diffuse>0 0 1 0.5</diffuse>
+          </material>
+        </visual>
+        <sensor name="cam_right_sensor" type="depth_camera">
+          <gz_frame_id>camera_right_link</gz_frame_id>
+          <topic>camera_right</topic>
+          <pose>0 0 0 0 0 3.14159</pose>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+          <visualize>true</visualize>
+          <point_cloud name="points">
+            <samples>1</samples>
+            <min_depth>0.1</min_depth>
+            <max_depth>10.0</max_depth>
+          </point_cloud>
+          <camera name="cam_right">
+            <horizontal_fov>1.047</horizontal_fov>
+            <image>
+              <width>640</width><height>480</height>
+              <format>R_FLOAT32</format>
+            </image>
+            <clip><near>0.1</near><far>10.0</far></clip>
+          </camera>
+        </sensor>
+      </link>
+    </model>
+
+    <!-- 7) Left depth camera @ –2m, sensor yaw=0 -->
+    <model name="depth_camera_minus_x">
+      <static>true</static>
+      <pose>-2 0 1 0 0 0</pose>
+      <link name="link">
+        <visual name="viz_box_left">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry><box><size>0.2 0.2 0.2</size></box></geometry>
+          <material>
+            <ambient>0 0 1 0.5</ambient>
+            <diffuse>0 0 1 0.5</diffuse>
+          </material>
+        </visual>
+        <sensor name="cam_left_sensor" type="depth_camera">
+          <gz_frame_id>camera_left_link</gz_frame_id>
+          <topic>camera_left</topic>
+          <pose>0 0 0 0 0 0</pose>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+          <visualize>true</visualize>
+          <point_cloud name="points">
+            <samples>1</samples>
+            <min_depth>0.1</min_depth>
+            <max_depth>10.0</max_depth>
+          </point_cloud>
+          <camera name="cam_left">
+            <horizontal_fov>1.047</horizontal_fov>
+            <image>
+              <width>640</width><height>480</height>
+              <format>R_FLOAT32</format>
+            </image>
+            <clip><near>0.1</near><far>10.0</far></clip>
+          </camera>
+        </sensor>
+      </link>
+    </model>
+
+  </world>
+</sdf>

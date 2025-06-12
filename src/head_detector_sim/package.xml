@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<package format="3">
+  <name>head_detector_sim</name>
+  <version>0.1.0</version>
+  <description>Simulation of two depth cameras viewing a cube</description>
+
+  <maintainer email="you@youremail.com">Your Name</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>ros_gz_sim</depend>
+  <depend>ros_gz_bridge</depend>
+  <depend>tf2_ros</depend>
+  <depend>sensor_msgs</depend>
+  <depend>rviz2</depend>
+
+  <export>
+    <!-- If you were packaging external models, you could add:
+    <gazebo_ros>
+      <gazebo_model_path>${prefix}/share/${PROJECT_NAME}/worlds</gazebo_model_path>
+    </gazebo_ros>
+    -->
+    <build_type>ament_cmake</build_type>
+
+  </export>
+  
+</package>

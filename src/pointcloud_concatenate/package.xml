@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>pointcloud_concatenate</name>
+  <version>0.0.1</version>
+  <description>
+    A node to concatenate up to 4 pointclouds and output the concatenated pointcloud on a single topic.
+  </description>
+  <maintainer email="albertsseligmann@gmail.com">Albert Seligmann</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>pcl_ros</depend>
+  <depend>sensor_msgs</depend>
+  <depend>tf2_ros</depend>
+  <depend>rviz2</depend>
+  <depend>Boost</depend>
+  <depend>Eigen3</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -50,6 +50,8 @@ source install/setup.bash
 After a few seconds Gazebo spawns two RealSense D435i sensors and a walking
 avatar; RViz opens and overlays a green cube on the detected head.
 
+<video src="src/assets/videos/gazebo_realtime.mp4" width="320" height="240" controls></video>
+
 ---
 
 ## 🧩 Package Overview
